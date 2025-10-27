@@ -122,3 +122,15 @@ What it represents:
 How to interpret results: 
 - 98% of all digits were classified correctly 
 
+## CNN Results
+```
+Epoch 8: train 0.9958, test 0.9985                                              
+Best: 0.9985
+``` 
+
+## CNN vs. MLP 
+
+- CNN exploits spatial locality: nearby pixels processed together; MLP treats each pixel as independent feature (flat 784 vector)
+- CNN use shared weights, fewer params; MLP are fully connected, high parameter count 
+- CNN learns edges, then shapes, then digit structure; MLP learns global patterns 
+- CNN 99.3-99.6% accuracy; MLP 98-99% accuracy 
