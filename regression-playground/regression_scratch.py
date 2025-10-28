@@ -4,6 +4,7 @@ from pathlib import Path
 from sklearn.datasets import fetch_california_housing
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score
+import json, pathlib
 
 FIGS = Path(__file__).resolve().parent / "figs"
 FIGS.mkdir(exist_ok=True)
@@ -130,5 +131,7 @@ if __name__ == "__main__":
     w, stats, hist = train_batch_gd(X, y, lr=0.1, epochs=200, l2=1e-3)
     plot_curves(hist, prefix="scratch-lr-0.1")
 
+    pathlib.Path("figs").mkdir(exist_ok=True)
+    with open("figs/hist_scratch.json","w") as f: json.dump(hist, f)
     # quick report on validation performance 
     print(f"Final Val R^2: {hist['va_r2'][-1]:.3f}")
