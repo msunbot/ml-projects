@@ -79,3 +79,27 @@ python logreg_torch.py --deg 3 --lr 0.01 --lam 0.03 --epochs 2000
 Outputs are saved in the figs/ folder 
 ---
 
+## Visualization 
+- vis.ipynb provides visual comparisons of logistic regression of 2D toy data (make_moons) using 
+- Numpy (from-scratch GD) - deg 1 & deg 2 feature maps
+- PyTorch (mini-batch AdamW) - deg3 feature map
+- PyTorch MLP on raw(x1, x2) for a nonlinear baseline
+
+## Results 
+Numpy (deg 1) val acc: 0.85; Numpy (deg 2, quad): 0.86; PyTorch Logistic (deg 3 full cubic): 0.96; PyTorch MLP (2x64 ReLU): 0.97-0.99 
+
+## How to Run 
+```
+cd decision-boundary-visualizer
+python3 logreg_numpy.py
+# degree-2 (sanity ~0.86)
+python3 logreg_torch.py --deg 2 --lr 0.01 --lam 0.00 --epochs 1500
+# degree-3 (best ~0.95–0.96)
+python3 logreg_torch.py --deg 3 --lr 0.01 --lam 0.03 --epochs 2000
+```
+
+## Key Learnings
+- Feature maps (deg2/deg3) let a linear model learn non-linear boundaries
+- Regularization (L2 / weight decay) smooths the curve; too much makes it linear again
+- BCEWithLogitsLoss + AdamW is a stable PyTorch recipe for logistic regression
+- An MLP on raw input often outperforms polynominal LR with less manual feature work 
